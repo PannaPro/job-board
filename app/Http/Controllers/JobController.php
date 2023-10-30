@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Job;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -11,9 +12,9 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = \App\Models\Job::Paginate(10);
+        $jobs = Job::Paginate(10);
 
-        return view("job.index", compact('jobs'));
+        return view('job.index', compact('jobs'));
     }
 
     /**
@@ -35,9 +36,9 @@ class JobController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+    public function show(Job $job)
+    {   
+        return view('job.show', compact('job'));
     }
 
     /**
