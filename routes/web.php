@@ -13,5 +13,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('', fn() => to_route('job.index'));
 
 Route::resource('job', JobController::class)->only('index');

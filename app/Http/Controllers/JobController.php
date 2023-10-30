@@ -11,7 +11,7 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = \App\Models\Job::all();
+        $jobs = \App\Models\Job::Paginate(10);
 
         return view("job.index", compact('jobs'));
     }
