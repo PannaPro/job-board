@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Laravel Job Board</title>
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-slate-100 text-slate-800">
+<body class="bg-slate-300 text-slate-800">
     <div class="mx-auto pr-5 pl-5 mt-10 max-w-3xl ">
         <div class="container">
             <div class="mb-10" >
-                <a href="{{route('jobs.index') }}"><header class="text-4xl">Job board</header></a>
+                <a href="{{ route('jobs.index') }}"><header class="text-4xl">Job board</header></a>
             </div>
 
         {{ $slot }}
