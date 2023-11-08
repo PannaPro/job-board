@@ -10,15 +10,42 @@
 </head>
 
 <body class="bg-slate-300 text-slate-800">
-    <div class="mx-auto pr-5 pl-5 mt-10 max-w-3xl ">
-        <div class="container">
-            <div class="mb-10" >
-                <a href="{{ route('jobs.index') }}"><header class="text-4xl">Job board</header></a>
-            </div>
+    <div class="mx-auto pr-5 pl-5 mt-10 max-w-3xl">
+            <nav class="mb-8 flex justify-between text-lg">
+                <ul>
+                    <li>
+                        <a href="{{ route('jobs.index') }}"><header class="text-4xl">Job Board</header></a>
+                    </li>
+                </ul>
+
+                <ul>
+                    @auth
+                        <div class="flex justify-between space-x-5">
+                            <li>   
+                            {{ Auth()->user()->name ?? Anynomus }}
+                            </li>
+                            <li>
+                                <form action="{{ route('auth.destroy')}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="hover:underline">Logout</button>
+                                </form>
+                            </li>
+                        </div>    
+                    @else
+                        <li>
+                            <a href="{{ route('auth.create')}}">Sign in</a>    
+                        </li>
+                    @endauth
+
+                </ul>
+         
+               
+            </nav>
+
 
         {{ $slot }}
 
-        </div>
     </div>
     
     <div name="footer" class="mt-20 pt-20 bg-slate-800 text-white mx-auto pl-20">
