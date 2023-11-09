@@ -4,9 +4,18 @@
     :links="['Jobs'=> route('jobs.index'), $job->title =>'#']"/>
 
     <x-job-card :$job>
-        <div class="text-sm text-slate-500">
+        <div class="mb-4 text-sm text-slate-500">
             <p> {!! nl2br(e($job->description)) !!} </p>
         </div>
+        @can('apply', $job)
+          <x-button>
+            <a href="{{ route('job.application.create', $job)}}">Apply</a>
+          </x-button>
+        @else
+          <div class="text-sm text-slate-500 text-center">
+            You already applied this job
+          </div>
+        @endcan
     </x-job-card>
 
     <x-card class="mb-4">

@@ -6,7 +6,7 @@
         </div>
     </div>
 
-    <div class="mb-10 flex justify-between text-center">
+    <div class="mb-5 flex justify-between text-center">
         <div class="flex justify-between space-x-5 items-center">
             <div>
                 <a href="{{ route('jobs.show', $job)}}">{{ $job->employer->company_name }}</a></div>

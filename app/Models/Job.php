@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use App\Models\Employer;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Query\Builder;
 use illuminate\Database\Eloquent\Builder as QueryBuilder;
 
@@ -19,6 +21,24 @@ class Job extends Model
     public function employer(): BelongsTo
     {
         return $this->belongsTo(Employer::class);
+    }
+
+    public function jobApplications(): HasMany
+    {
+        return $this->hasMany(JobApplication::class);
+    }
+
+    /**
+     * Method for checking if user already has application for job
+     * bool - if current user has job application in db - true. Page won't be access.
+     */
+    public function hasUserApplied(Authenticatable|User|int $user): bool
+    {
+        return $this->where('id', $this->id)
+            ->whereHas(
+                'jobApplications',
+                fn($query) => $query->where('user_id', '=' , $user->id ?? $user)
+            )->exists();
     }
 
     /**

@@ -1,6 +1,6 @@
 <x-layout>
     
-    <h1 class="text-slate-800 text-4xl mb-10 place-items-center">Sign in to your account</h1>
+    <h1 class="text-slate-800 text-3xl mb-10 text-center">Sign in to your account</h1>
 
     <x-card class="py-8 px-16">
         <form action="{{ route('auth.store')}}" method="POST">
@@ -9,7 +9,7 @@
             
             <div class="mb-8">
                 <label for="email" class="mb-2 block text-sm font-medium text-slate-900">
-                    E-mail - bkuphal@example.org
+                    E-mail - jakob36@example.org
                 </label>
                 <x-text-input name="email" type="email" required/>
 

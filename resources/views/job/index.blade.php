@@ -49,9 +49,6 @@
         </form>
     </x-card>
 
-
-    {{-- <x-breadcrumbs class="mb-4" :links="['Jobs'=> route('jobs.index')]"></x-breadcrumbs> --}}
-
     @forelse ($jobs as $job)
         <x-job-card :$job>
             <div class="mt-8">

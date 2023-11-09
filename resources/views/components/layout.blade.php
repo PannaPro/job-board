@@ -11,7 +11,7 @@
 
 <body class="bg-slate-300 text-slate-800">
     <div class="mx-auto pr-5 pl-5 mt-10 max-w-3xl">
-            <nav class="mb-8 flex justify-between text-lg">
+            <nav class="mb-8 flex justify-between text-lg items-center">
                 <ul>
                     <li>
                         <a href="{{ route('jobs.index') }}"><header class="text-4xl">Job Board</header></a>
@@ -21,9 +21,11 @@
                 <ul>
                     @auth
                         <div class="flex justify-between space-x-5">
-                            <li>   
-                            {{ Auth()->user()->name ?? Anynomus }}
-                            </li>
+                            <a href="{{ route('my-job-applications.index')}}">
+                                <li>   
+                                    {{ Auth()->user()->name ?? Anynomus }} : My Applications
+                                </li>
+                            </a>
                             <li>
                                 <form action="{{ route('auth.destroy')}}" method="post">
                                     @csrf
@@ -39,10 +41,14 @@
                     @endauth
 
                 </ul>
-         
-               
             </nav>
-
+        @if(session('success'))
+            <div role="alert"
+                class="my-8 rounded-md border-l-4 border-green-300 bg-green-100 p-4 text-green-400">
+                <p class="font-bold">Success!</p>
+                <p>{{ session('success')}}</p>
+            </div>
+        @endif
 
         {{ $slot }}
 
