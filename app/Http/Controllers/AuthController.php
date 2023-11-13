@@ -22,10 +22,12 @@ class AuthController extends Controller
         $credentials = $request->only('email','password');
         $remeber = $request->filled('remember');
 
+
+
         if(Auth::attempt($credentials, $remeber)){
             return redirect()->intended('/')->with('success','Welcome');
         } else {
-            return redirect()->back()->with(['error'=> 'Invalid credentials']);
+            return redirect()->back()->with(['error' => 'Invalid credentials']);
         };
     }
 

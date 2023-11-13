@@ -8,20 +8,19 @@
             @csrf
             
             <div class="mb-8">
-                <label for="email" class="mb-2 block text-sm font-medium text-slate-900">
+                <x-label for="email" :required="true">
                     E-mail - jakob36@example.org
-                </label>
+                </x-label>
                 <x-text-input name="email" type="email" required/>
 
             </div>
             
             <div class="mb-8">
-                <label for="password" class="mb-2 block text-sm font-medium text-slate-900">
+                <x-label for="password" :required="true">
                     Password
-                </label>
+                </x-label>
                 <x-text-input name="password" type="password" required/>
             </div>
-
         
             <div class="mb-8  flex justify-between text-sm font-medium">
                 <div >
