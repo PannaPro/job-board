@@ -17,35 +17,60 @@
                         <a href="{{ route('jobs.index') }}"><header class="text-4xl">Job Board</header></a>
                     </li>
                 </ul>
-
-                <ul>
-                    @auth
-                        <div class="flex justify-between space-x-5">
-                            <a href="{{ route('my-job-applications.index') }}">
-                                <li>   
-                                    {{ Auth()->user()->name ?? Anynomus }} : My Applications
+                <div>
+                    <div>
+                        <ul>
+                            @auth
+                                <div class="flex justify-between space-x-4 mb-4 text-sm">
+                                    <div>
+                                        {{ Auth()->user()->name ?? Anynomus }} 
+                                    </div>
+                                    <div>
+                                        <form action="{{ route('auth.destroy') }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="hover:underline">Logout</button>
+                                        </form>
+                                    </div>
+                                </div> 
+                            @endauth   
+                        </ul>
+                    </div>
+                    <div>
+                        <ul>
+                            @auth 
+                                <div class="flex justify-between space-x-5">
+                                    <div>
+                                        <a href="{{ route('my-job-applications.index') }}">
+                                            <li>   
+                                                My Applications
+                                            </li>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        @if(auth()->user()->employer)
+                                            <a href="{{ route('my-job.index') }}">
+                                                <li>  
+                                                    My Jobs
+                                                </li>
+                                            </a>
+                                        @else
+                                            <a href="{{ route('employer.create') }}">
+                                                <li>  
+                                                    For Employer
+                                                </li>
+                                            </a>     
+                                        @endif
+                                    </div>                            
+                                </div>    
+                            @else
+                                <li>
+                                    <a href="{{ route('auth.create')}}">Sign in</a>    
                                 </li>
-                            </a>
-                            <a href="{{ route('my-job.index') }}">
-                                <li>   
-                                    My Jobs
-                                </li>
-                            </a>
-                            <li>
-                                <form action="{{ route('auth.destroy') }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="hover:underline">Logout</button>
-                                </form>
-                            </li>
-                        </div>    
-                    @else
-                        <li>
-                            <a href="{{ route('auth.create')}}">Sign in</a>    
-                        </li>
-                    @endauth
-
-                </ul>
+                            @endauth
+                        </ul>
+                    </div>
+                </div>
             </nav>
         @if(session('success'))
             <div role="alert"

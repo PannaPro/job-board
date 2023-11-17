@@ -15,7 +15,16 @@ class Job extends Model
 {
     use HasFactory;
 
-    public static array $expirience = ['entry', 'intermediate', 'senior'];
+    protected $fillable = [
+        'title',
+        'location',
+        'salary',
+        'description',
+        'experience',
+        'category'
+        ];
+
+    public static array $experience = ['entry', 'intermediate', 'senior'];
     public static array $category = ['IT', 'Finance', 'Sales', 'Marketing'];
 
     public function employer(): BelongsTo
@@ -37,7 +46,7 @@ class Job extends Model
         return $this->where('id', $this->id)
             ->whereHas(
                 'jobApplications',
-                fn($query) => $query->where('user_id', '=' , $user->id ?? $user)
+                fn($query) => $query->where('user_id', '=', $user->id ?? $user)
             )->exists();
     }
 
@@ -65,9 +74,9 @@ class Job extends Model
         })->when($filters['max_salary'] ?? null, function ($query, $maxSalary) {
             // Applying a filter for the maximum salary.
             $query->where('salary', '<=', $maxSalary);
-        })->when($filters['expirience'] ?? null, function ($query, $expirience) {
+        })->when($filters['experience'] ?? null, function ($query, $experience) {
             // Applying a filter for the required experience.
-            $query->where('expirience', $expirience);
+            $query->where('experience', $experience);
         })->when($filters['category'] ?? null, function ($query, $category) {
             // Applying a filter for the job category.
             $query->where('category', $category);

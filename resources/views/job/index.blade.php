@@ -29,16 +29,17 @@
                 <div class="grid-cols-1">
                     <div class="mb-5 font-semibold">Experience</div>
 
-                    <x-radio-group name="expirience"
-                    :options=" array_combine(array_map('ucfirst' , \App\Models\Job::$expirience) , \App\Models\Job::$expirience)"></x-radio-group>
-
+                    <x-radio-group name="experience"
+                    :options=" array_combine(
+                        array_map('ucfirst' , \App\Models\Job::$experience) , \App\Models\Job::$experience
+                        )" />
                 </div>
 
                 {{-- category filter --}}
                 <div class="grid-cols-1">
                     <div class="mb-5 font-semibold">Category</div>
 
-                    <x-radio-group name="category" :options="\App\Models\Job::$category"></x-radio-group>
+                    <x-radio-group name="category" :options="\App\Models\Job::$category"/>
 
                 </div>
             </div>
