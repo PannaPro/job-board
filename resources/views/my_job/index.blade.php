@@ -28,12 +28,19 @@
                 </div>
               @endforelse
               
-                <div class="mt-4 flex space-x-2">
+                <div class="mt-4 flex space-x-2 items-center">
                   @if (!$job->jobApplications->count() > 0)
                     <div>
                       <x-link-button :href="route('my-job.edit', $job)">Edit</x-link-button>
                     </div>
                   @endif
+                    <form action="{{ route('my-job.destroy', $job) }}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                        <x-button>
+                          Delete
+                        </x-button>
+                    </form>
                     <div>
                     </div>
 

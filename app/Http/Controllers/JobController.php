@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
-use Illuminate\Http\Request;
-use Illuminate\Database\Query\Builder;
 
 class JobController extends Controller
 {
@@ -22,7 +20,10 @@ class JobController extends Controller
 
         return view(
             'job.index',
-            ['jobs' => Job::with('employer')->latest()->filter($filters)->get()]
+            ['jobs' => Job::with('employer')
+                ->latest()
+                ->filter($filters)
+                ->get()]
         );
     }
 
